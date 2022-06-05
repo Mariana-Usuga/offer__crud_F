@@ -1,0 +1,68 @@
+
+<div class="container" [ngClass]="popupSwitch? 'invisible': '' ">
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+          *ngFor="let offer of offers"
+          >
+            <th scope="row">{{offer.id}}</th>
+            <td>{{offer.name}}</td>
+            <td>
+              <button (click)="delete(offer)" class="btn btn-danger">Delete</button>
+            </td>
+            <td>
+              <button (click)="openEdit(offer)" class="btn btn-primary">Edit</button>
+            </td>
+            <td><button class="btn btn-primary" (click)="getPricesByOffer(offer)">Actions</button></td>
+            <!-- <td (click)="getPricesByOffer(offer.id)"><button type="text">show prices</button></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-4 text-center">
+      <div>
+        <label for="name">Insert Offer:</label>
+        <input id="name" type="text" [(ngModel)]="selectedOffer.name" placeholder="name">
+      </div>
+      <button type="button" (click)="createOEdit()" class="btn btn-primary">submit</button>
+    </div>
+  </div>
+</div>
+
+<div class="container fixed-top bg-light border border-dark mt-5" *ngIf="popupSwitch === true">
+  <button (click)="openPopup()"
+  type="text"
+  class="btn btn-danger"
+  style="position: relative; left:95%">X</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+      *ngFor="let price of prices"
+      >
+        <th scope="row">{{price.id}}</th>
+        <td>{{price.name}}</td>
+        <td>{{price.description}}</td>
+        <td>{{price.price_value}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
