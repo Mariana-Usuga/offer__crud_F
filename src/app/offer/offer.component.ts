@@ -75,7 +75,7 @@ export class OfferComponent implements OnInit {
   }
 
   openEditPrice(price: Price){
-    this.openInputEdit()
+    this.openInputEdit();
     this.selectedPrice = price
   }
 
