@@ -1,6 +1,6 @@
 # Offer and prices CRUD
 
-###### Con ese proyecto podras crear y elimar offertas
+###### Con ese proyecto podras crear y elimar ofertas
 ###### Con ese proyecto podras editar precios
 
 ## Desplegada
