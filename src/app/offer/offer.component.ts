@@ -38,7 +38,7 @@ export class OfferComponent implements OnInit {
         {
           next: data => {
             this.offers = data;
-            localStorage.setItem('offers',  JSON.stringify( this.offers ))
+            localStorage.setItem('offers',  JSON.stringify( this.offers ));
             this.error = false;
           },
           error: (err) => {
@@ -75,6 +75,7 @@ export class OfferComponent implements OnInit {
       this.offerService.deleteOffer(offer.id).subscribe()
       this.selectedOffer = offer
       this.offers = this.offers.filter(offer => offer != this.selectedOffer)
+      localStorage.setItem('offers',  JSON.stringify( this.offers ));
       this.selectedOffer = new Offer();
     }
   }
