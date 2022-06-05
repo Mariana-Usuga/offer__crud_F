@@ -1,10 +1,10 @@
 # Offer and prices CRUD
 
-Con ese proyecto podras crear, elimar offertas y editar precios
+Con ese proyecto podras crear, elimar offertas, caracteristicas y precios
 
-## Pruebala
+## Desplegada
 
-Pruebala en el siguiente link: https://offercrud.netlify.app/
+Desplegada en Heroku: https://offercrud.netlify.app/
 
 ## Construido con
 
