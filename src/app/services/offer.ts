@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 
 export class OfferService {
 
-  private url: string = "https://offer-crud.herokuapp.com/api";
+  private url: string = "https://offer-crud.herokuapp";
 
   constructor(private http: HttpClient) { }
 

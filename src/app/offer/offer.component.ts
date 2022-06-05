@@ -17,7 +17,7 @@ export class OfferComponent implements OnInit {
   ];
 
   prices: Price[] = [
-    {id:1, name:"offer", description:"description offer", price_value:20, offer_id:2},
+    {id:1, name:"price", description:"description price", price_value:20, offer_id:2},
   ];
 
   selectedOffer: Offer = new Offer()
@@ -31,6 +31,7 @@ export class OfferComponent implements OnInit {
   ngOnInit(): void {
     if(localStorage.getItem('offers') === null){
       this.offerService.getOffers().subscribe(data => {
+        console.log('entra en get')
         console.log('data', data)
         this.offers = data;
       })
