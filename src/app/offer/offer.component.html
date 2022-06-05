@@ -18,13 +18,11 @@
             <th scope="row">{{offer.id}}</th>
             <td>{{offer.name}}</td>
             <td>
-              <button (click)="delete(offer)" class="btn btn-danger">Delete</button>
+              <button (click)="removeOffer(offer)" class="btn btn-danger">Delete</button>
             </td>
-            <!-- <td>
-              <button (click)="openEdit(offer)" class="btn btn-primary">Edit</button>
-            </td> -->
-            <td><button class="btn btn-primary" (click)="getPricesByOffer(offer)">Actions</button></td>
-            <!-- <td (click)="getPricesByOffer(offer.id)"><button type="text">show prices</button></td> -->
+            <td>
+              <button class="btn btn-primary" (click)="getPricesByOffer(offer)">Actions</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -34,7 +32,7 @@
         <label for="name">Insert Offer:</label>
         <input id="name" type="text" [(ngModel)]="selectedOffer.name" placeholder="name">
       </div>
-      <button type="button" (click)="createOEdit()" class="btn btn-primary">submit</button>
+      <button type="button" (click)="createOffer()" class="btn btn-primary">submit</button>
     </div>
   </div>
 </div>
@@ -67,12 +65,14 @@
       </tr>
     </tbody>
   </table>
-  <div class="mt-4 text-center">
+  <div class="mt-4 text-center"  *ngIf="inputEdit === true">
     <div>
       <label for="name">Edit Price:</label>
       <input id="name" type="text" [(ngModel)]="selectedPrice.name" placeholder="name">
     </div>
-    <button type="button" (click)="createOrEditPrice()" class="btn btn-primary">submit</button>
+    <button type="button" (click)="editPrice()" class="btn btn-primary">
+      submit
+    </button>
   </div>
 </div>
 
