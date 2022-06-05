@@ -29,16 +29,15 @@ export class OfferComponent implements OnInit {
   constructor(private offerService : OfferService, private priceService:PriceService ) { }
 
   ngOnInit(): void {
-    if(localStorage.getItem('offers') === null){
+    if(localStorage.getItem('offers') === null  || this.offers.length <= 1){
       this.offerService.getOffers().subscribe(data => {
-        console.log('entra en get')
-        console.log('data', data)
         this.offers = data;
+        localStorage.setItem('offers',  JSON.stringify( this.offers ))
       })
+    }else if (this.offers.length === 1 && localStorage.getItem('offers') != null){
       localStorage.setItem('offers',  JSON.stringify( this.offers ))
-    }else{
-      this.offers = JSON.parse(localStorage.getItem('offers') || '{}');
     }
+      this.offers = JSON.parse(localStorage.getItem('offers') || '{}');
   }
 
   createOffer(){
