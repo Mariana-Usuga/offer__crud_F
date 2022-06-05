@@ -20,9 +20,9 @@
             <td>
               <button (click)="delete(offer)" class="btn btn-danger">Delete</button>
             </td>
-            <td>
+            <!-- <td>
               <button (click)="openEdit(offer)" class="btn btn-primary">Edit</button>
-            </td>
+            </td> -->
             <td><button class="btn btn-primary" (click)="getPricesByOffer(offer)">Actions</button></td>
             <!-- <td (click)="getPricesByOffer(offer.id)"><button type="text">show prices</button></td> -->
           </tr>
@@ -61,8 +61,18 @@
         <td>{{price.name}}</td>
         <td>{{price.description}}</td>
         <td>{{price.price_value}}</td>
+        <td>
+          <button (click)="openEditPrice(price)" class="btn btn-primary">Edit</button>
+        </td>
       </tr>
     </tbody>
   </table>
+  <div class="mt-4 text-center">
+    <div>
+      <label for="name">Edit Price:</label>
+      <input id="name" type="text" [(ngModel)]="selectedPrice.name" placeholder="name">
+    </div>
+    <button type="button" (click)="createOrEditPrice()" class="btn btn-primary">submit</button>
+  </div>
 </div>
 

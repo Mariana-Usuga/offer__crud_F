@@ -26,6 +26,7 @@ export class OfferComponent implements OnInit {
   ];
 
   selectedOffer: Offer = new Offer()
+  selectedPrice: Price = new Price()
 
   popupSwitch!: boolean;
 
@@ -34,14 +35,16 @@ export class OfferComponent implements OnInit {
   // localStorage.setItem("offersLocal", JSON.stringify( this.offers ))
 
   ngOnInit(): void {
-    // if(offersLocal){
-    //   this.offers = offersLocal;
-    // }
-    this.offerService.getPokemon().subscribe(data => {
-      console.log('entra ngInt')
-      console.log('DATA', data)
-      this.offers = data;
-    })
+    if(localStorage.getItem('offers') === null){
+      this.offerService.getPokemon().subscribe(data => {
+        console.log('entra ngInt')
+        console.log('DATA', data)
+        this.offers = data;
+        localStorage.setItem('offers',  JSON.stringify( this.offers ))
+      })
+    }else{
+      this.offers = JSON.parse(localStorage.getItem('offers') || '{}');
+    }
   }
   saveOffers(){
     return this.offers;
@@ -60,11 +63,29 @@ export class OfferComponent implements OnInit {
     this.selectedOffer = new Offer();
   }
 
-  openEdit(offer: Offer){
+  createOrEditPrice(){
+    if(this.selectedPrice.id === 0 && this.prices.length > 3){
+      this.offerService.addOrEdit(this.selectedOffer).subscribe(data => {
+        console.log('data', data)
+        // this.offers.push(this.selectedOffer)
+    })
+  }else if(this.selectedPrice.id === 0){
+    console.log('entra')
+    this.offers.push(this.selectedPrice)
+  }
+
+    this.selectedPrice = new Price();
+  }
+
+  openEditOffer(offer: Offer){
     // this.offerService.updateOffer(this.selectedOffer).subscribe(data => {
     //   console.log('data', data)
     // })
     this.selectedOffer = offer
+  }
+
+  openEditPrice(price: Price){
+    this.selectedPrice = price
   }
 
   delete(offer: Offer){
@@ -91,7 +112,4 @@ export class OfferComponent implements OnInit {
   }
 }
 
-// function saveOffers(): any {
-//   throw new Error('Function not implemented.');
-// }
 

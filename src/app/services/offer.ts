@@ -38,4 +38,8 @@ export class OfferService {
     console.log('entra en getpokemon')
     return this.http.get<Price[]>(`${this.url}/price/report/${id}`)
   }
+
+  updatePrice(price: Price){
+    return this.http.put<Offer[]>(`${this.url}/price`, price)
+  }
 }
