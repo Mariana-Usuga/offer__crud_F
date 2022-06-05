@@ -25,18 +25,30 @@ export class OfferComponent implements OnInit {
 
   popupSwitch!: boolean;
   inputEdit!: boolean;
+  error: any;
 
   constructor(private offerService : OfferService, private priceService:PriceService ) { }
 
   ngOnInit(): void {
-    if(localStorage.getItem('offers') === null  || this.offers.length <= 1){
-      this.offerService.getOffers().subscribe(data => {
-        this.offers = data;
-        localStorage.setItem('offers',  JSON.stringify( this.offers ))
-      })
-    }else if (this.offers.length === 1 && localStorage.getItem('offers') != null){
+    if(localStorage.getItem('offers') === null){
+      console.log('entra if')
+      this.offerService.getOffers().subscribe(
+        {
+          next: data => {
+            this.offers = data;
+            localStorage.setItem('offers',  JSON.stringify( this.offers ))
+          },
+          error: err => {
+            console.log('entra en err', err.error.msg)
+            this.error = err.error.msg;
+            console.log('entra en err', this.error)
+          }
+        })
+    }
+    if(this.error === undefined){
       localStorage.setItem('offers',  JSON.stringify( this.offers ))
     }
+
       this.offers = JSON.parse(localStorage.getItem('offers') || '{}');
   }
 
