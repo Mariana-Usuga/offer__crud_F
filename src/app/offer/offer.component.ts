@@ -54,7 +54,7 @@ export class OfferComponent implements OnInit {
     if(this.selectedOffer.id === 0 && this.offers.length > 3){
       this.offerService.addOrEdit(this.selectedOffer).subscribe(data => {
         console.log('data', data)
-        // this.offers.push(this.selectedOffer)
+        this.offers.push(this.selectedOffer)
     })
   }else if(this.selectedOffer.id === 0){
     this.offers.push(this.selectedOffer)
