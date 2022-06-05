@@ -25,43 +25,48 @@ export class OfferComponent implements OnInit {
 
   popupSwitch!: boolean;
   inputEdit!: boolean;
-  error: any;
+  error: boolean = true;
 
   constructor(private offerService : OfferService, private priceService:PriceService ) { }
 
   ngOnInit(): void {
+    this.offers = JSON.parse(localStorage.getItem('offers') || '{}');
+
     if(localStorage.getItem('offers') === null){
-      console.log('entra if')
+      console.log('if 1')
       this.offerService.getOffers().subscribe(
         {
           next: data => {
             this.offers = data;
             localStorage.setItem('offers',  JSON.stringify( this.offers ))
+            this.error = false;
           },
-          error: err => {
-            console.log('entra en err', err.error.msg)
-            this.error = err.error.msg;
-            console.log('entra en err', this.error)
+          error: (err) => {
+            console.log('errr',err.error.msg )
           }
         })
-    }
-    if(this.error === undefined){
+    }else if(this.error){
       localStorage.setItem('offers',  JSON.stringify( this.offers ))
     }
-
-      this.offers = JSON.parse(localStorage.getItem('offers') || '{}');
   }
 
   createOffer(){
-    if(this.selectedOffer.id === 0 && this.offers.length > 3 ){
-      this.offerService.addOffer(this.selectedOffer).subscribe(data => {
-        console.log('data', data)
-      })
-      this.offers.push(this.selectedOffer)
-    }else if(this.selectedOffer.id === 0){
-      this.offers.push(this.selectedOffer)
-    }
-    localStorage.setItem('offers',  JSON.stringify( this.offers ))
+
+    this.offerService.addOffer(this.selectedOffer).subscribe(
+      {
+        next: data => {
+          this.offers.push(this.selectedOffer)
+          this.error = false;
+        },
+        error: (err) => {
+          console.log('errr',err.error.msg )
+        }
+      });
+
+      if(this.error){
+        this.offers.push(this.selectedOffer);
+        localStorage.setItem('offers',  JSON.stringify( this.offers ));
+      }
     this.selectedOffer = new Offer();
   }
 
