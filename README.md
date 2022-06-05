@@ -3,9 +3,9 @@
 ##### Con ese proyecto podras crear y elimar ofertas
 ##### Con ese proyecto podras editar precios
 
-## Desplegada
+## Pruebala
 
-Desplegada en Heroku: https://offercrud.netlify.app/
+Pruebala en el siguiente link: https://offercrud.netlify.app/
 
 ## Correr proyecto en tu local
 
