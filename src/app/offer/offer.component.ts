@@ -31,6 +31,7 @@ export class OfferComponent implements OnInit {
   ngOnInit(): void {
     if(localStorage.getItem('offers') === null){
       this.offerService.getOffers().subscribe(data => {
+        console.log('data', data)
         this.offers = data;
       })
       localStorage.setItem('offers',  JSON.stringify( this.offers ))
